@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Apizz789\\Documents\\GitHub\\SOFTWARE_STUDIO\\MvcMovie\\MvcMovie.csproj",
+      "projectUniqueName": "C:\\Users\\Apizz789\\Documents\\GitHub\\SOFTWARE_STUDIO\\Ajax Caculator\\MvcMovie\\MvcMovie.csproj",
       "projectName": "MvcMovie",
-      "projectPath": "C:\\Users\\Apizz789\\Documents\\GitHub\\SOFTWARE_STUDIO\\MvcMovie\\MvcMovie.csproj",
+      "projectPath": "C:\\Users\\Apizz789\\Documents\\GitHub\\SOFTWARE_STUDIO\\Ajax Caculator\\MvcMovie\\MvcMovie.csproj",
       "packagesPath": "C:\\Users\\Apizz789\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Apizz789\\Documents\\GitHub\\SOFTWARE_STUDIO\\MvcMovie\\obj\\",
+      "outputPath": "C:\\Users\\Apizz789\\Documents\\GitHub\\SOFTWARE_STUDIO\\Ajax Caculator\\MvcMovie\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Apizz789\\AppData\\Roaming\\NuGet\\NuGet.Config"
