@@ -4,55 +4,121 @@
 
 <div class="text-center">
     <div class="container" id="c1">
-        <h1 class="display-4">Welcome to My Fucking Caculator!</h1>
-        <p>Learn about <a href="">Please Enter Your Number.</a>.</p>
+        <h1 class="display-4">Welcome to My Lovely Caculator!</h1>
+        <p>Please Enter Your Number.</p>
         </hr>
 
         <h1>___Calculator___</h1>
+        </br>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-16">
-                <input type="text" id="result" style="max-width: 1920px !important;width: 100%;" />
-                <div id="keypad">
-                    <div class="row">
-                        <span id="num7" class="col-sm-3 btn btn-default">๗</span>
-                        <span id="num8" class="col-sm-3 btn btn-default">๘</span>
-                        <span id="num9" class="col-sm-3 btn btn-default">๙</span>
-                        <span id="Divide" class="col-sm-3 btn btn-info">/</span>
-                    </div>
-                    <div class="row">
-                        <span id="num4" class="col-sm-3 btn btn-default">๔</span>
-                        <span id="num5" class="col-sm-3 btn btn-default">๕</span>
-                        <span id="num6" class="col-sm-3 btn btn-default">๖</span>
-                        <span id="Mul" class="col-sm-3 btn btn-info">*</span>
-                    </div>
-                    <div class="row">
-                        <span id="num1" class="col-sm-3 btn btn-default">๑</span>
-                        <span id="num2" class="col-sm-3 btn btn-default">๒</span>
-                        <span id="num3" class="col-sm-3 btn btn-default">๓</span>
-                        <span id="Sub" class="col-sm-3 btn btn-info">-</span>
-                    </div>
-                    <div class="row">
-                        @* <span id="num0" class="col-sm-3 btn btn-default"></span> *@
-                        <span id="num0" class="col-sm-6 btn btn-info">๐</span>
-                        <span id="Dec" class="col-sm-3 btn btn-default">.</span>
-                        <span id="Add" class="col-sm-3 btn btn-info">+</span>
-                    </div>
-                    <div class="row">
-                        <span id="mairu" class="col-sm-6 btn btn-default disabled"></span>
-                        <span id="Clear" class="col-sm-3 btn btn-primary">CLEAR</span>
-                        <span id="Equal" class="col-sm-3 btn btn-success">=</span>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="col-6">
+        <input type="text" id="op1" style="max-width: 1920px !important; width: 30%; margin-bottom: 10px" hidden />
+        <input type="text" id="oldOperator" style="max-width: 1920px !important; width: 10%; margin-bottom: 10px" hidden />
+        <input type="text" id="op2" style="max-width: 1920px !important; width: 30%; margin-bottom: 10px" hidden />
+        <input type="text" id="newOperator" style="max-width: 1920px !important; width: 10%; margin-bottom: 10px" hidden />
+        <input type="text" id="result" style="max-width: 1920px !important; width: 100%" />
+        <div>
+            <span id="clear" class="keypad col-sm-2 btn btn-primary" style="margin-top: 10px; margin-bottom: 10px; float: right">CE</span>
+            <div class="clearfix"></div>
+            <div class="row">
+                <span id="num7" class="keypad col-sm-3 btn btn-default mb-1">7</span>
+                <span id="num8" class="keypad col-sm-3 btn btn-default mb-1">8</span>
+                <span id="num9" class="keypad col-sm-3 btn btn-default mb-1" style="margin-right: 5px">9</span>
+                <span id="opDivide" class="keypad col-sm-2 btn btn-danger mb-1">/</span>
+            </div>
+            <div class="row">
+                <span id="num4" class="keypad col-sm-3 btn btn-default mb-1">4</span>
+                <span id="num5" class="keypad col-sm-3 btn btn-default mb-1">5</span>
+                <span id="num6" class="keypad col-sm-3 btn btn-default mb-1" style="margin-right: 5px">6</span>
+                <span id="opMul" class="keypad col-sm-2 btn btn-danger mb-1">*</span>
+            </div>
+            <div class="row">
+                <span id="num1" class="keypad col-sm-3 btn btn-default mb-1">1</span>
+                <span id="num2" class="keypad col-sm-3 btn btn-default mb-1">2</span>
+                <span id="num3" class="keypad col-sm-3 btn btn-default mb-1" style="margin-right: 5px">3</span>
+                <span id="opSub" class="keypad col-sm-2 btn btn-danger mb-1">-</span>
+            </div>
+            <div class="row">
+                <span id="num0" class="keypad col-sm-3 btn btn-default">0</span>
+                <span id="decimal" class="keypad col-sm-3 btn btn-default">.</span>
+                <span id="num7" class="keypad col-sm-3 btn btn-success" style="margin-right: 5px">=</span>
+                <span id="opAdd" class="keypad col-sm-2 btn btn-danger">+</span>
             </div>
         </div>
     </div>
-
-
-
 </div>
 
+@section Scripts {
+    <script>
+        var globlavariable ="";
 
+        function Eval(op1, op2, oldOp, newOp){
+            $.ajax({
+                method:"POST",
+                url: "/Calculator/Evaluate",
+                data: { first: op1, second: op2, oper: oldOp },
+                success: function (result) {
+                    $("#op1").val(result);
+                    $("#op2").val("");
+                    $("#oldOperator").val(newOp);
+                    $("#newOperator").val("");
+                    $("#result").val(result + newOp);
+                },
+                error: function(error){
+                    alert(error);
+                }
+            })
+        }
 
-</div>
+        $(document).ready(function(){
+            $(".keypad").click(function(e){
+                var value = e.currentTarget.innerHTML;
+                var oldOp = $("#oldOperator").val();
+                var newOp = $("#newOperator").val();
+                var op1 = $("#op1").val();
+                var op2 = $("#op2").val();
+                if(value != "=" && value != "CE"){
+                    var result = $("#result").val();
+                    result = result + value;
+
+                    var operators = ["+", "-", "*", "/"];
+                    if($.inArray(value,operators) != -1){
+                        if($.trim(op1) == ""){
+                            alert("Please enter a number.");
+                            return false;
+                        }
+                        if($.trim(oldOp) == ""){
+                            $("#oldOperator").val(value);
+                        } else {
+                            if($.trim(newOp) == "" || newOp == undefined){
+                                if($.trim(op2) == ""){
+                                    alert("Please enter a number.");
+                                    return false;
+                                }else{
+                                    $("#newOperator").val(value);
+                                    Eval(op1,op2,oldOp,value);
+                                }
+                            }
+                        }
+                    } else {
+                        if (oldOp == undefined || $.trim(oldOp) == ""){
+                            $("#op1").val(op1 + value);
+                        }else{
+                            $("#op2").val(op2 + value);
+                        }
+                    }
+                    $("#result").val(result);
+                } else if(value=="CE"){
+                    $("#op1").val("");
+                    $("#op2").val("");
+                    $("#oldOperator").val("");
+                    $("#newOperator").val("");
+                    $("#result").val("");
+                } else {
+                    Eval(op1,op2,oldOp,newOp);
+                }
+            })
+        })
+    </script>
+}
